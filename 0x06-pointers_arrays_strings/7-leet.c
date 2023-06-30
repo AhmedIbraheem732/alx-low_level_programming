@@ -1,22 +1,45 @@
-#include "main.h"
+#include <stdio.h>
+
 /**
-* leet - function that encode a string
-*@str:string that will be encoded
-*Return:returns encoded string
-*/
+ * leet - function that encodes a string using the "leet" encoding scheme
+ * @str: string to be encoded
+ * Return: encoded string
+ */
 char *leet(char *str)
 {
-	int index1 = 0, index2;
-	char leet[8] = {'O', 'L', '?', 'E', 'A', '?', '?', 'T'};
+    char leetMap[5][2] = {
+        {'A', '4'},
+        {'E', '3'},
+        {'O', '0'},
+        {'T', '7'},
+        {'L', '1'}
+    };
 
-	while (str[++index1])
-	{
-		for (index2 = 0; index2 <= 7; index2++)
-		{
-			if (str[index1] == leet[index2] ||
-			 str[index1] - 32 == leet[index2])
-				str[index1] = index2 + '0';
-		}
-	}
-	return (str);
+    int i, j;
+
+    for (i = 0; str[i] != '\0'; i++)
+    {
+        for (j = 0; j < 5; j++)
+        {
+            if (str[i] == leetMap[j][0] || str[i] == leetMap[j][0] + 32)
+            {
+                str[i] = leetMap[j][1];
+                break;
+            }
+        }
+    }
+
+    return str;
+}
+
+int main(void)
+{
+    char input[100];
+    printf("Enter a string: ");
+    fgets(input, sizeof(input), stdin);
+
+    printf("Original string: %s", input);
+    printf("Encoded string: %s", leet(input));
+
+    return 0;
 }
