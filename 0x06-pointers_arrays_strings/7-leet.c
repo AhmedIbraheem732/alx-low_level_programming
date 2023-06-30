@@ -1,45 +1,32 @@
-#include <stdio.h>
+#include "main.h"
 
 /**
- * leet - function that encodes a string using the "leet" encoding scheme
- * @str: string to be encoded
- * Return: encoded string
+ * leet - Encodes a string into "1337".
+ * @str: The string to be encoded.
+ *
+ * Return: A pointer to the encoded string.
  */
 char *leet(char *str)
 {
-    char leetMap[5][2] = {
-        {'A', '4'},
-        {'E', '3'},
-        {'O', '0'},
-        {'T', '7'},
-        {'L', '1'}
-    };
-
+    char *ptr = str;
+    char *leetMap = "aAeEoOtTlL";
+    char *leetCode = "43071";
     int i, j;
 
-    for (i = 0; str[i] != '\0'; i++)
+    while (*ptr)
     {
-        for (j = 0; j < 5; j++)
+        i = 0;
+        while (leetMap[i])
         {
-            if (str[i] == leetMap[j][0] || str[i] == leetMap[j][0] + 32)
+            if (*ptr == leetMap[i])
             {
-                str[i] = leetMap[j][1];
+                *ptr = leetCode[i / 2];
                 break;
             }
+            i++;
         }
+        ptr++;
     }
 
     return str;
-}
-
-int main(void)
-{
-    char input[100];
-    printf("Enter a string: ");
-    fgets(input, sizeof(input), stdin);
-
-    printf("Original string: %s", input);
-    printf("Encoded string: %s", leet(input));
-
-    return 0;
 }
