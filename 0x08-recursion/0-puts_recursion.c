@@ -1,6 +1,11 @@
-#include "main.h"
-int main(void)
+void _puts_recursion(char *s)
 {
-    _puts_recursion("Puts with recursion");
-    return (0);
+    if (*s == '\0')  // Base case: end of the string
+    {
+        _putchar('\n');  // Print a newline character
+        return;  // Exit the function
+    }
+
+    _putchar(*s);  // Print the current character
+    _puts_recursion(s + 1);  // Make a recursive call with the next character
 }
